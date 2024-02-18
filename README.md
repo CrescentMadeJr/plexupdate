@@ -1,19 +1,20 @@
+# plexupdate
+
 Forked from: https://github.com/mrworf/plexupdate
 
 I created this fork to add health checks to the script.  The health checks need to be configured manually in the config file, for now.  You can install as decribed below, and if you do not configure the URL, it will ignore my modifications and move on.  I think...
 
 ![plexupdate.sh](http://i.imgur.com/ThY5Rvl.png "plexupdate")
-# plexupdate
 
 Plex Update is a bash script which helps you keep Plex Media Server up to date on Linux.
 
 You can schedule updates to run daily and install Plex Pass beta releases if you have a Plex Pass membership.
 
-# Installation
+## Installation
 
 In the old days, this used to be a bit of a chore. But no more!
 
-```
+```bash
 bash -c "$(wget -qO - https://raw.githubusercontent.com/CrescentMadeJr/plexupdate/master/extras/installer.sh)"
 ```
 
@@ -23,7 +24,7 @@ If you'd ever like to change your configuration, just re-run the installer from 
 
 If you have any trouble with the installer, or would just prefer to set plexupdate up manually, [read the guide](https://github.com/mrworf/plexupdate/wiki/Manually-installing-plexupdate).
 
-# Advanced options
+## Advanced options
 
 There are a few additional options for the more enterprising user. Setting any of these to `yes` will enable the function.
 
@@ -57,7 +58,7 @@ There are a few additional options for the more enterprising user. Setting any o
 
 Most of these options can be specified on the command-line as well, this is just a more convenient way of doing it if you're scripting it. Which brings us to...
 
-## Command Line Options
+### Command Line Options
 
 Plexupdate comes with many command line options. For the most up-to-date list, run plexupdate.sh with -h
 
@@ -72,16 +73,16 @@ Here are some of the more useful ones:
 - `--port <Plex server port>`
   This is the port that Plex Media Server uses.
 
-# FAQ
+## FAQ
 
-## Do I have to use the `extras/installer.sh`?
+### Do I have to use the `extras/installer.sh`?
 
 Of course not, anything you find under `extras/` is optional and only provided as an easier way to get `plexupdate.sh` up and running quickly. Read the guide for [installing plexupdate manually](https://github.com/mrworf/plexupdate/wiki/Manually-installing-plexupdate).
 
-## Why am I getting a warning about email and password being deprecated?
+### Why am I getting a warning about email and password being deprecated?
 
 Since just storing your password in plexupdate.conf isn't secure, plexupdate will now use a "token" instead. To make this warning go away just re-run the installer (`extras/installer.sh`) or manually remove `EMAIL` and `PASS` from your plexupdate.conf. For more details, see [this wiki article](https://github.com/mrworf/plexupdate/wiki/Authenticating-with-Plex-Pass).
 
-# Need more information?
+## Need more information?
 
-See https://github.com/mrworf/plexupdate/wiki for more information
+See https://github.com/mrworf/plexupdate/wiki for more information.
