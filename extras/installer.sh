@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ORIGIN_REPO="https://github.com/${GIT_OWNER:-crescentmade}/plexupdate"
+ORIGIN_REPO="https://github.com/${GIT_OWNER:-CrescentMadeJr}/plexupdate"
 FULL_PATH="/opt/plexupdate"
 CONFIGFILE="/etc/plexupdate.conf"
 CONFIGCRON="/etc/plexupdate.cron.conf"
