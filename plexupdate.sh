@@ -17,7 +17,7 @@
 #        10 if new file was downloaded/installed (requires --notify-success)
 #       255 configuration is invalid
 #
-# All other return values not documented.
+# All other return values not documented.Failed to install update.
 #
 # Call program with -h for available options
 #
@@ -445,6 +445,11 @@ fi
 
 if ! isNewerVersion "$FILE_VERSION" "$INSTALLED_VERSION" && [ "${FORCE}" != "yes" ]; then
 	info "Your OS reports the latest version of Plex ($INSTALLED_VERSION) is already installed. Use -f to force download."
+	# Requires variable to be set in plexupdate.conf, and must be set manually for now.
+	if [ -n "${HEALTHCHECKURL}" ]; then
+	curl -fsS -m 10 --retry 5 --data-raw "The latest version of Plex ($INSTALLED_VERSION) is already installed." "$HEALTHCHECKURL"/0
+	echo
+	fi
 	exit 0
 fi
 
@@ -483,6 +488,11 @@ if [ -n "${PLEXSERVER}" -a "${AUTOINSTALL}" = "yes" ]; then
 	# Check if server is in-use before continuing (thanks @AltonV, @hakong and @sufr3ak)...
 	if running "${PLEXSERVER}" "${PLEXPORT}"; then
 		error "Server ${PLEXSERVER} is currently being used by one or more users, skipping installation. Please run again later"
+			# Requires variable to be set in plexupdate.conf, and must be set manually for now.
+			if [ -n "${HEALTHCHECKURL}" ]; then
+			curl -fsS -m 10 --retry 5 --data-raw "Server ${PLEXSERVER} is currently being used. Skipping update." "$HEALTHCHECKURL"/6
+			echo
+			fi
 		exit 6
 	fi
 fi
@@ -497,6 +507,11 @@ if [ "${AUTOINSTALL}" = "yes" ]; then
 	if [ ${RET} -ne 0 ]; then
 		# Clarify why this failed, so user won't be left in the dark
 		error "Failed to install update. Command '${DISTRO_INSTALL} "${DOWNLOADDIR}/${FILENAME}"' returned error code ${RET}"
+			# Requires variable to be set in plexupdate.conf, and must be set manually for now.
+			if [ -n "${HEALTHCHECKURL}" ]; then
+			curl -fsS -m 10 --retry 5 --data-raw "Failed to install update." "$HEALTHCHECKURL"/${RET}
+			echo
+			fi
 		exit ${RET}
 	fi
 fi
@@ -527,8 +542,13 @@ if [ "${AUTOSTART}" = "yes" ]; then
 	fi
 fi
 
+# Notify success if we downloaded and possibly installed the update
 if [ "${NOTIFY}" = "yes" ]; then
-	# Notify success if we downloaded and possibly installed the update
+	# Requires variable to be set in plexupdate.conf, and must be set manually for now.
+	if [ -n "${HEALTHCHECKURL}" ]; then
+	curl -fsS -m 10 --retry 5 --data-raw "Failed to install update." "$HEALTHCHECKURL"
+	echo
+	fi
 	exit 10
 fi
 exit 0

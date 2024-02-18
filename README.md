@@ -1,3 +1,7 @@
+Forked from: https://github.com/mrworf/plexupdate
+
+I created this for to add health checks to the script.  The health checks ned to be configured manually in the config file, for now.  You can install as decribed below, and if you do not configure the URL, it will ignore my modifications and move on.  I think...
+
 ![plexupdate.sh](http://i.imgur.com/ThY5Rvl.png "plexupdate")
 # plexupdate
 

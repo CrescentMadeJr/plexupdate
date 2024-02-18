@@ -66,4 +66,11 @@ if [ $RET -ne 0 ] ; then
 fi
 
 rm "${LOGFILE}" 2>/dev/null
+
+# Requires variable to be set in plexupdate.cron.conf, and must be set manually for now.
+if [ -n "${HEALTHCHECKURL}" ]; then
+  curl -fsS -m 10 --retry 5 --data-raw "Cron has run." "$HEALTHCHECKURL"/"$RET"
+  echo
+fi
+
 exit $RET
